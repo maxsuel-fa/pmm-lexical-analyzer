@@ -31,4 +31,4 @@ The lexical analyzer was implemented using a series of finite automata, which we
 - [Hype here](link to Author 1 Github profile)
 - [Lucas Carvalho Freiberger Stapf - 11800559](https://github.com/LucasStapf)
 - [Maxsuel F. de Almeida - 11801028](https://github.com/maxsuel-fa)
-- [Cubi here](link to Author 3 Github profile)
+- [Vinícius Santos Cubi Paulo - 11965693](https://github.com/viniciuscubi)
