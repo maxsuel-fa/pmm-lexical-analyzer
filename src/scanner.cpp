@@ -1,5 +1,8 @@
-#include "../include/scanner.hpp"
 #include <iostream>
+
+#include "../include/scanner.hpp"
+#include "../include/utils.hpp"
+
 /**
  * @brief Given a imput file stream to a pmm source code,
  * constructs a scanner to read lexemes from such source code
@@ -12,113 +15,63 @@ Scanner::Scanner(std::ifstream& file_stream)
  * @brief Gets the next lexeme in the source file
  * @return std::string the next lexeme in the source file
  **/
-std::string Scanner::next_lexeme()
+std::string Scanner::tokenize()
 {
     // Ignore initial white spaces
     Scanner::consume_whitespace();
 
-    std::string lexeme;
-
-    // If the lexeme is compoused only of a separator, returns it
-    if (Scanner::is_separator(file_stream_.peek())) {
-        lexeme.push_back(file_stream_.get());
-        return lexeme;
+    // Consume comment
+    if (utils::is_comment(file_stream_.peek())) {
+        Scanner::consume_comment();
     }
 
-    // If the lexeme is compoused only of a operator, returns it
-    if (Scanner::is_operator(file_stream_.peek())) {
-        while(Scanner::is_operator(file_stream_.peek())) {
-            lexeme.push_back(file_stream_.get());
+    std::string lexeme;
+
+    // If the lexeme is a separator, returns it
+    if (utils::is_separator(file_stream_)) {
+        return Scanner::process_chain(utils::is_separator);
+    }
+
+    // If the lexeme is a operator, returns it
+    if (utils::is_operator(file_stream_)) {
+        return Scanner::process_chain(utils::is_operator);
+    }
+
+    // If the lexeme is a literal, integer or float, returns it
+    if (utils::is_digit(file_stream_)) {
+        lexeme = Scanner::process_chain(utils::is_digit);
+        if(file_stream_.peek() != '.')  {
+            return lexeme;
+        }
+        lexeme.push_back(file_stream_.get());
+        if (utils::is_digit(file_stream_)) {
+            lexeme.append(Scanner::process_chain(utils::is_digit));
+            return lexeme;
         }
         return lexeme;
     }
 
-    // Consume comment
-    if (Scanner::is_comment(file_stream_.peek())) {
-        Scanner::consume_comment();
+    // If the lexeme is an identifier or a keyword
+    if (utils::is_letter(file_stream_)) {
+        return Scanner::process_chain(utils::is_alphanumeric);
     }
 
-    // Read a lexeme that is neither a separator nor a operator
-    while (!file_stream_.eof()
-        && !Scanner::is_separator(file_stream_.peek())
-        && !Scanner::is_operator(file_stream_.peek())
-        && !Scanner::is_whitespace(file_stream_.peek())
-        && !Scanner::is_comment(file_stream_.peek())) {
-        lexeme.push_back(file_stream_.get());
-    }
-
+    lexeme.push_back(file_stream_.get());
     return lexeme;
 }
 
 /**
- * @brief Verifies if a given character is a separator
- * in the pmm programming language
- * @param ch the character to be verified
- * @return bool true in case ch is a separator or false otherwise
- **/
-bool Scanner::is_separator(const char& ch)
-{
-    if (ch == ':') {
-        file_stream_.get();
-        const char& temp = file_stream_.peek();
-        file_stream_.unget();
-
-        return temp != '=';
-    }
-
-    return ch == ','
-        || ch == '.'
-        || ch == ';'
-        || ch == ':'
-        || ch == '('
-        || ch == ')';
-}
-
-/**
- **/
-bool Scanner::is_whitespace(const char& ch)
-{
-    return ch == ' ' || ch == '\n' || ch == '\t';
-}
-
-/**
- **/
-bool Scanner::is_operator(const char& ch)
-{
-    if (ch == ':') {
-        file_stream_.get();
-        const char& temp = file_stream_.peek();
-        file_stream_.unget();
-
-        return temp == '=';
-    }
-
-    return ch == '+'
-        || ch == '-'
-        || ch == '*'
-        || ch == '/'
-        || ch == '>'
-        || ch == '<'
-        || ch == '=';
-}
-
-/**
- **/
-bool Scanner::is_comment(const char& ch)
-{
-    return ch == '{';
-}
-
-/**
+ * TODO
  **/
 void Scanner::consume_whitespace()
 {
-    while (Scanner::is_whitespace(file_stream_.peek())) {
+    while (utils::is_whitespace(file_stream_.peek())) {
         file_stream_.get();
     }
 }
 
 /**
+ * TODO
  **/
 void Scanner::consume_comment()
 {
@@ -126,4 +79,17 @@ void Scanner::consume_comment()
     while ((temp = file_stream_.get()) != '}')
         ;
     Scanner::consume_whitespace();
+}
+
+/**
+ * TODO
+ **/ 
+std::string Scanner::process_chain(std::function<bool(std::ifstream&)> f)
+{
+    std::string lexeme;
+    while(!file_stream_.eof()
+            && f(file_stream_)) {
+        lexeme.push_back(file_stream_.get());
+    }
+    return lexeme;
 }

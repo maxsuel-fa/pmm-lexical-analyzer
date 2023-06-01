@@ -2,20 +2,25 @@
  **/
 #pragma once
 #include <fstream>
+#include <functional>
 
-class Scanner
-{
+class Scanner {
 public:
+    // Constructors
     Scanner(void) = default;
     Scanner(std::ifstream&);
-    std::string next_lexeme(void);
+
+    // Common methods
+    std::string tokenize(void);
+
+    // Setters and Getters
+    void file_stream(const std::ifstream&);
 
 private:
     std::ifstream& file_stream_;
-    bool is_separator(const char&);
-    bool is_whitespace(const char&);
-    bool is_operator(const char&);
-    bool is_comment(const char&);
     void consume_whitespace(void);
     void consume_comment(void);
+    std::string process_chain(std::function<bool(std::ifstream&)>);
 };
+
+
