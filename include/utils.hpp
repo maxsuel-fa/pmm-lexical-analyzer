@@ -1,9 +1,22 @@
 #pragma once
 
-#include <fstream>
+/*
+ * TODO
+ */
+enum class Symbol {
+    DIGIT,
+    LETTER,
+    OPERATOR,
+    SEPARATOR,
+    START_COMMENT,
+    END_COMMENT,
+    WHITESPACE,
+    DOT,
+    STRAY
+};
 
-namespace utils 
-{
+namespace utils {
+Symbol next_symbol(std::ifstream&);
 char after_next(std::ifstream&);
 bool is_separator(std::ifstream&);
 bool is_operator(std::ifstream&);

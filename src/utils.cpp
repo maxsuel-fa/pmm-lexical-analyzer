@@ -1,5 +1,34 @@
 #include "../include/utils.hpp"
 
+/*
+ * TODO
+ */
+Symbol utils::next_symbol(std::ifstream& file_stream)
+{
+    if (utils::is_digit(file_stream)) {
+        return Symbol::DIGIT;
+    }
+    if (utils::is_letter(file_stream)) {
+        return Symbol::LETTER;
+    }
+    if (utils::is_operator(file_stream)) {
+        return Symbol::OPERATOR;
+    }
+    if (utils::is_separator(file_stream)) {
+        return Symbol::SEPARATOR;
+    }
+    if (utils::is_start_comment(ch)) {
+        return Symbol::START_COMMENT;
+    }
+    if (utils::is_end_comment(ch)) {
+        return Symbol::END_COMMENT;
+    }
+    if (utils::is_whitespace(ch)) {
+        return Symbol::WHITESPACE;
+    }
+    return Symbol::STRAY;
+}
+
 /**
  * TODO
  **/
