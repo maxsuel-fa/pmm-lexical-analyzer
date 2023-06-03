@@ -1,17 +1,22 @@
-#include <iostream>
+#include "../include/lexer.hpp"
 #include <fstream>
-#include "../include/scanner.hpp"
-
+#include <iostream>
 
 int main(void)
 {
     std::ifstream f;
-    f.open("place the path for file here", std::ios::in);
-    Scanner s(f);
-    
+    f.open("./p2.txt", std::ios::in);
+    Lexer a;
+    std::pair<std::string, std::string> s;
     int i = 0;
-    while(!f.eof()) 
-        std::cout << i++ << ": "<< s.next_lexeme() << std::endl;
+    while (!f.eof()) {
+        s = a.next_token(f);
+        std::cout << i++ << ": "
+                  << s.first
+                  << " "
+                  << s.second
+                  <<std::endl;
+    }
     f.close();
     return 0;
 }
