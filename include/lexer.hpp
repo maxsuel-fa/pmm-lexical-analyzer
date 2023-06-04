@@ -1,8 +1,8 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <unordered_map>
-#include <set>
 
 #include "automata.hpp"
 
@@ -16,8 +16,11 @@ public:
 
 private:
     Automata automata_;
-    std::set<std::string> keyword_table_;
-    std::set<std::string> operator_table_;
-    std::unordered_map<State, 
-        std::unordered_map<bool, std::string>> token_table_;
+    std::map<std::string, std::string> keyword_table_;
+    std::map<std::string, std::string> separator_table_;
+    std::map<std::string, std::string> operator_table_;
+    std::unordered_map<State,
+        std::unordered_map<bool, std::string>>
+        token_table_;
+    std::string format_label(const std::string&, const std::string&);
 };

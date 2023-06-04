@@ -10,6 +10,7 @@ Automata::Automata(void)
     transition_table_[State::Q0][Symbol::WHITESPACE] = State::Q0;
     transition_table_[State::Q0][Symbol::START_COMMENT] = State::Q1;
     transition_table_[State::Q0][Symbol::SEPARATOR] = State::Q2;
+    transition_table_[State::Q0][Symbol::DOT] = State::Q2;
     transition_table_[State::Q0][Symbol::OPERATOR] = State::Q3;
     transition_table_[State::Q0][Symbol::LETTER] = State::Q4;
     transition_table_[State::Q0][Symbol::DIGIT] = State::Q5;
@@ -40,6 +41,7 @@ Automata::Automata(void)
     transition_table_[State::Q4][Symbol::START_COMMENT] = State::Q7;
     transition_table_[State::Q4][Symbol::END_COMMENT] = State::Q7;
     transition_table_[State::Q4][Symbol::SEPARATOR] = State::Q7;
+    transition_table_[State::Q4][Symbol::DOT] = State::Q7;
     transition_table_[State::Q4][Symbol::OPERATOR] = State::Q7;
     transition_table_[State::Q4][Symbol::STRAY] = State::Q7;
 
