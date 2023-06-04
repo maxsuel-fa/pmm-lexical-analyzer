@@ -104,7 +104,8 @@ std::pair<std::string, State> Automata::extended_transition_function(
     State next_state { state };
     std::string lexeme;
 
-    while (!final_states_.count(next_state)) {
+    while (file_stream.peek() != EOF
+        && !final_states_.count(next_state)) {
         lexeme.push_back(file_stream.get());
         next_state = transition_function(next_state, symbol);
         symbol = read_symbol(file_stream);
@@ -122,7 +123,7 @@ std::pair<std::string, State> Automata::extended_transition_function(
  */
 Symbol Automata::read_symbol(std::ifstream& file_stream)
 {
-    const char ch_symbol { (char) file_stream.peek() };
+    const char ch_symbol { (char)file_stream.peek() };
     if (utils::is_digit(ch_symbol)) {
         return Symbol::DIGIT;
     }
