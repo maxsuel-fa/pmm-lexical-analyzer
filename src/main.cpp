@@ -24,6 +24,7 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    std::cout << "Running the lexical analysis..." << std::endl;
     while (input_file_stream.peek() != EOF) {
         token = lexer.next_token(input_file_stream);
         output_file_stream << token.first 
@@ -31,6 +32,9 @@ int main(int argc, char** argv)
             << token.second
             << std::endl;
     }
+    std::cout << "Done!" << std::endl
+        << "You can find the output file in" << argv[2]
+        << std::endl;
 
     input_file_stream.close();
     output_file_stream.close();
