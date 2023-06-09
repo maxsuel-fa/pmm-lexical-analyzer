@@ -1,5 +1,8 @@
 #include "../include/lexer.hpp"
 
+/*
+ * @brief Constructs a new lexeme.
+ */
 Lexer::Lexer(void)
 {
     keyword_table_["program"] = "PROGRAM";
@@ -24,8 +27,8 @@ Lexer::Lexer(void)
     separator_table_["."] = "DOT";
     separator_table_[";"] = "SEMICOLON";
     separator_table_[":"] = "COLON";
-    separator_table_["("] = "LEFT_PARETHESES";
-    separator_table_[")"] = "RIGHT_PARETHESES";
+    separator_table_["("] = "LEFT_PARENTHESES";
+    separator_table_[")"] = "RIGHT_PARENTHESES";
 
     operator_table_["="] = "EQUAL_TO";
     operator_table_["<>"] = "NOT_EQUAL_TO";
@@ -51,11 +54,13 @@ Lexer::Lexer(void)
 }
 
 /*
- * TODO
+ * @brief Given the stream to the input file, gets the next lexeme 
+ * and tokenizes it. 
+ * @param file_stream the stream to the input file
+ * @return pair<string, string> the next token (lexeme, class)  
  */
 std::pair<std::string, std::string> Lexer::next_token(std::ifstream& file_stream)
 {
-    std::string chain;
     std::pair<std::string, State>
         temp { automata_.extended_transition_function(State::Q0, file_stream) };
 
@@ -75,7 +80,11 @@ std::pair<std::string, std::string> Lexer::next_token(std::ifstream& file_stream
 }
 
 /*
- * TODO
+ * @brief Given the lexeme and its label, formats the
+ * label that will be presented in the output file.
+ * @param lexeme the current lexeme
+ * @param label the label (class) of the lexeme
+ * @return string the formated label
  */
 std::string Lexer::format_label(const std::string& lexeme,
     const std::string& label)

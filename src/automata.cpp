@@ -2,7 +2,7 @@
 #include "../include/utils.hpp"
 
 /*
- * TODO
+ * @brief Constructs a new automada
  */
 Automata::Automata(void)
 {
@@ -85,7 +85,11 @@ Automata::Automata(void)
 }
 
 /*
- * TODO
+ * @brief The transition function of the automata.
+ * Given a state and a symbol, returns the next state.
+ * @param state the current state
+ * @param symbol the symbol read from the tape
+ * @return State the next state
  */
 const State& Automata::transition_function(const State& state,
     const Symbol& symbol)
@@ -94,7 +98,13 @@ const State& Automata::transition_function(const State& state,
 }
 
 /*
- * TODO
+ * @brief Given a state and the stream to the input file
+ * reads the next lexeme and propagates it throughout the 
+ * automata.
+ * @param state the current state
+ * @param file_stream the stream to the input file
+ * @return pair<string, State> the lexeme and the final state
+ * it reach in the automata
  */
 std::pair<std::string, State> Automata::extended_transition_function(
     const State& state,
@@ -119,7 +129,11 @@ std::pair<std::string, State> Automata::extended_transition_function(
 }
 
 /*
- * TODO
+ * @brief Given the stream to the input file, returns
+ * the equivalent symbol of the ascii character read from
+ * the file.
+ * @param file_stream the stream to the input file
+ * @return Symbol the symbol of the char read
  */
 Symbol Automata::read_symbol(std::ifstream& file_stream)
 {
