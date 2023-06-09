@@ -33,7 +33,7 @@ clean:
 
 # Running tests
 test:
-	./$(TARGET) < test/input_file > test/output_file
+	./$(TARGET) < input_samples/circle_area.pmm > test/output_file
 	diff test/output_file test/expected_output_file
 
 # Running the lexical analyzer

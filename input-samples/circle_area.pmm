@@ -1,0 +1,29 @@
+program example ;
+const PI = 3.14 ;
+var radius, area : real ;
+var count : integer ;
+
+procedure calculateArea (r : real) ;
+var tempArea : real ;
+begin
+    tempArea := PI * r * r ;
+    write(tempArea) ;
+end ;
+
+begin
+    { This program calculates the area of a circle }
+    read(radius) ;
+    if radius > 0 then
+    begin
+        calculateArea(radius) ;
+    end
+    else
+    begin
+        write("Invalid radius") ;
+    end ;
+
+    for count := 1 to 10 do
+    begin
+        write(count) ;
+    end ;
+end.

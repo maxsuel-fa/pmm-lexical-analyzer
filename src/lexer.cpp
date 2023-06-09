@@ -61,7 +61,8 @@ std::pair<std::string, std::string> Lexer::next_token(std::ifstream& file_stream
 
     if (temp.second != State::Q2
         && temp.second != State::Q6
-        && !operator_table_.count(temp.first)) {
+        && !operator_table_.count(temp.first)
+        && !temp.first.empty()) {
         temp.first.pop_back();
         file_stream.unget();
     }

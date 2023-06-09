@@ -1,0 +1,32 @@
+program complex_example ;
+const MAX_VALUE = 100 ;
+var num1, num2, result : integer ;
+
+function calculateSum (a, b : integer) : integer ;
+var sum : integer ;
+begin
+    sum := a + b ;
+    return sum ;
+end ;
+
+begin
+    { This program calculates the sum of two numbers }
+    read(num1, num2) ;
+    result := calculateSum(num1, num2) ;
+
+    if result >= MAX_VALUE then
+    begin
+        write("Sum exceeds the maximum value") ;
+    end
+    else
+    begin
+        write("Sum: ", result) ;
+    end ;
+
+    while result > 0 do
+    begin
+        result := result - 1 ;
+        write(result) ;
+    end ;
+end.
+
