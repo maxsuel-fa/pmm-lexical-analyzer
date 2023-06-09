@@ -33,7 +33,7 @@ int main(int argc, char** argv)
             << std::endl;
     }
     std::cout << "Done!" << std::endl
-        << "You can find the output file in" << argv[2]
+        << "You can find the output file in: " << argv[2]
         << std::endl;
 
     input_file_stream.close();
