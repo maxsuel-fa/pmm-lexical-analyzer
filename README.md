@@ -4,7 +4,7 @@ This program implements a lexical analyzer for the P-- language, based on the gr
 
 ## Compilation
 
-To compile the lexical analyzer, symple run the following command in the terminal:
+To compile the lexical analyzer, symply run the following command in the terminal:
 
 ```
 make
