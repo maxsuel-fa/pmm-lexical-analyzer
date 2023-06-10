@@ -9,7 +9,7 @@
 #include "../include/utils.hpp"
 
 /*
- * TODO
+ * @brief The alphabet of the automata
  */
 enum class Symbol {
     DIGIT,
@@ -24,7 +24,7 @@ enum class Symbol {
 };
 
 /*
- * TODO
+ * @brief The set of states of the automata
  */
 enum class State {
     Q0,
@@ -44,7 +44,7 @@ enum class State {
 };
 
 /*
- * TODO
+ * @brief Defines an automata especific to the P-- language
  */
 class Automata {
 public:

@@ -7,7 +7,7 @@
 #include "automata.hpp"
 
 /*
- * TODO
+ * @brief Defines the lexical analyzer of the P-- language
  */
 class Lexer {
 public:

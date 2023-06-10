@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+ * @brief A set of functions to deal with the symbols 
+ * automata
+ */
 namespace utils {
 bool is_separator(const char&);
 bool is_operator(const char&);

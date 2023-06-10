@@ -43,11 +43,11 @@ Lexer::Lexer(void)
     operator_table_[":="] = "ASSIGN";
 
     token_table_[State::Q2][false] = "SEPARATOR_";
-    token_table_[State::Q6][false] = "NOT_ALLOWED_SYMBOL";
+    token_table_[State::Q6][false] = "ERROR(NOT_ALLOWED_SYMBOL)";
     token_table_[State::Q7][true] = "KEYWORD_";
     token_table_[State::Q7][false] = "IDENTIFIER";
     token_table_[State::Q8][false] = "INTEGER_LITERAL";
-    token_table_[State::Q10][false] = "INVALID_NUMBER";
+    token_table_[State::Q10][false] = "ERROR(INVALID_NUMBER)";
     token_table_[State::Q12][false] = "FLOAT_LITERAL";
     token_table_[State::Q13][true] = "OPERATOR_";
     token_table_[State::Q13][false] = "SEPARATOR_";
